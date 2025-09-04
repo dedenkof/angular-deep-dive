@@ -1,59 +1,23 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, Inject, Injector, OnInit} from '@angular/core';
-import {Course} from './model/course';
-import {Observable} from 'rxjs';
-import {AppConfig, CONFIG_TOKEN} from './config';
-import {COURSES} from '../db-data';
-import {CoursesService} from './courses/courses.service';
-import {createCustomElement} from '@angular/elements';
-import {CourseTitleComponent} from './course-title/course-title.component';
-import {CourseCardComponent} from './courses/course-card/course-card.component';
-import {CourseImageComponent} from './courses/course-image/course-image.component';
-import {NgForOf} from '@angular/common';
-
+import { Component } from "@angular/core";
+import { CourseCardComponent } from "./course-card/course-card.component";
+import { COURSES } from "src/db-data";
+import { Course } from "./model/course";
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    imports: [
-        CourseCardComponent,
-        CourseImageComponent,
-        NgForOf
-    ]
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+  imports: [CourseCardComponent],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  onCourseSelected(course: Course) {
+    console.log('Card clicked!', course);
+  }
 
-    courses: Course[] = COURSES;
+	courses = COURSES;
 
-    coursesTotal = this.courses.length;
-
-    constructor(
-        private coursesService: CoursesService,
-        @Inject(CONFIG_TOKEN) private config: AppConfig,
-        private injector: Injector) {
-
-    }
-
-    ngOnInit() {
-
-        //const htmlElement = createCustomElement(CourseTitleComponent, {injector:this.injector});
-
-        //customElements.define('course-title', htmlElement);
-
-    }
-
-    onEditCourse() {
-
-            this.courses[1].category = 'ADVANCED';
-
-    }
-
-    save(course: Course) {
-        this.coursesService.saveCourse(course)
-            .subscribe(
-                () => console.log('Course Saved!')
-            );
-    }
-
-
+	// tracking loop for function insert into for track instead course.id (not use our example not suit on)
+	// trackCourse(index:number, course:Course) {
+	// 	return course.id;
+	// }
 }
