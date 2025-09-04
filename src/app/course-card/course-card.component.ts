@@ -12,7 +12,7 @@ export class CourseCardComponent implements OnInit{
 
 	@Input() course: Course;
 
-	@Input({required: true}) index: number;
+	@Input() cardIndex: number;
 
 	@Output() courseSelected = new EventEmitter<Course>();
 
