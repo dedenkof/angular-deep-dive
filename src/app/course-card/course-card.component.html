@@ -1,3 +1,20 @@
+// old syntax
+//<div class="course-card"
+//*ngIf="course"
+//[ngClass]="cardClasses()"
+//>
+//  <div class="course-title">{{cardIndex + '. ' + course.description}}</div>
+//  <img
+//	*ngIf="course.iconUrl else noImage"
+//	[src]="course.iconUrl"
+//    width="300"
+//    alt="Angular Logo"
+//  />
+
+//	<ng-template #noImage>
+//		<p>No image avialable</p>
+//	</ng-template>
+
 <div class="course-card">
   <div class="course-title">{{index}}. {{course.description}}</div>
 
@@ -11,6 +28,7 @@
 	}@else{
 		<h2>No Image</h2>
 	}
+
 
   <div class="course-description">
     {{course.longDescription}}
