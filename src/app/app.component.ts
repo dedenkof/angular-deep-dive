@@ -21,6 +21,16 @@ export class AppComponent {
 
 	courses = COURSES;
 
+	startDate = new Date(2025, 9, 5);
+
+	title = COURSES[0].description;
+
+	price = 9.996587989;
+
+	rate = 0.67;
+
+	course = COURSES[0];
+
 	// tracking loop for function insert into for track instead course.id (not use our example not suit on)
 	// trackCourse(index:number, course:Course) {
 	// 	return course.id;

@@ -5,10 +5,19 @@
   />
 </div>
 
+	<div>{{ courses | json }}</div>
+	<div class="keyvalue" *ngFor="let pair of course | keyvalue">{{ pair.key + ' : ' + pair.value}}</div>
+
 <div class="courses">
 
-  <!-- old suntax
-	<course-card *ngFor="let course of courses; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd"
+	<div class="demo">Start Date: {{ startDate | date: 'MMM/dd/yyyy'}}</div>
+	<div class="title">{{ title | titlecase }}</div>
+	<div class="price">{{ price | number:'3.3-5'}}</div>
+	<div class="currency">{{ price | currency: 'EU'}}</div>
+	<div class="rate">Percentage: {{ rate | percent }}</div>
+
+  <!-- old suntax -->
+	<course-card *ngFor="let course of courses| slice: 0:2; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd"
 	[course]="course"
 	(courseSelected)="onCourseSelected($event)"
 	[cardIndex]="i + 1"
@@ -16,9 +25,12 @@
 	[class.is-last]="isLast"
 	[class.is-even]="isEven"
 	[class.is-odd]="isOdd" 
-	/>-->
+	/>
+
 
 	
+	<!--
+	new syntax
 	@for( course of courses; track course.id; let index = $index; let count = $count; let first = $first; let last = $last; let even = $even; let odd = $odd;) {
 		
 		<course-card [class.is-first]="first" [class.is-last]="last" [class.is-even]="even" [class.is-odd]="odd" [course]="course" (courseSelected)="onCourseSelected($event)" [index]="index +1"/>
@@ -26,6 +38,6 @@
 
 	@empty {
 		<h1>No elements found</h1>
-	}
+	} -->
 
 </div>
