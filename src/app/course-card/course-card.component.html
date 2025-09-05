@@ -37,18 +37,26 @@
   </div>
 
 	old depracated syntax
-		<div class="course-category" [ngSwitch]="course.category">
+	<ng-container [ngSwitch]="course.category">
+		<div class="course-category">
+			<ng-container *ngSwitchCase="'BEGINNER'">
+				<div class="category">BEGINNER</div>
+			</ng-container>
 
-				<div class="category" *ngSwitchCase="'BEGINNER'">BEGINNER</div>
+			<ng-container *ngSwitchCase="'INTERMEDIATE'">
+				<div class="category">INTERMEDIATE</div>
+			</ng-container>
 
-				<div class="category" *ngSwitchCase="'INTERMEDIATE'">INTERMEDIATE</div>
+			<ng-container *ngSwitchCase="'ADVANCED'">
+				<div class="category">ADVANCED</div>
+			</ng-container>
 
-				<div class="category" *ngSwitchCase="'ADVANCED'">ADVANCED</div>
-
-				<div class="category" *ngSwitchDefault>UNKNOWN</div>
+			<ng-container *ngSwitchCase="'UNKNOWN'">
+				<div class="category">UNKNOWN</div>
+			</ng-container>
 			
 	</div>
-
+</ng-container>
 	<!-- <div class="course-category">
 		@switch(course.category) {
 			@case ("BEGINNER") {
