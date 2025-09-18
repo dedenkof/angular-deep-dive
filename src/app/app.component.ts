@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild, ViewChildren } from "@angular/core";
 import { CourseCardComponent } from "./course-card/course-card.component";
 import { COURSES } from "src/db-data";
 import { Course } from "./model/course";
@@ -15,21 +15,31 @@ import { CommonModule } from '@angular/common';
 })
 
 export class AppComponent {
-  onCourseSelected(course: Course) {
-    console.log('Card clicked!', course);
-  }
 
 	courses = COURSES;
 
-	startDate = new Date(2025, 9, 5);
+	@ViewChild(CourseCardComponent) card1: CourseCardComponent;
 
-	title = COURSES[0].description;
+	@ViewChild('cardRef', {read: ElementRef}) card: CourseCardComponent;
 
-	price = 9.996587989;
+	@ViewChild('container')
+	containerDiv: ElementRef;
 
-	rate = 0.67;
+	  onCourseSelected(course: Course) {
+    console.log('Card clicked!', this.card);
+  }
 
-	course = COURSES[0];
+
+
+	// startDate = new Date(2025, 9, 5);
+
+	// title = COURSES[0].description;
+
+	// price = 9.996587989;
+
+	// rate = 0.67;
+
+// course = COURSES[0];
 
 	// tracking loop for function insert into for track instead course.id (not use our example not suit on)
 	// trackCourse(index:number, course:Course) {
