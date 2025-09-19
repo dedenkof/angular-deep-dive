@@ -4,45 +4,23 @@
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
   />
 </div>
-<button (click)="onCoursesEdited()">Add Courses</button>
-<!-- <div>{{ courses | json }}</div>
-<div class="keyvalue" *ngFor="let pair of course | keyvalue">
-  {{ pair.key + " : " + pair.value }}
-</div> -->
 
-<div class="courses" #container>
-  <!-- old suntax
-	<course-card *ngFor="let course of courses| slice: 0:2; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd"
-	[course]="course"
-	(courseSelected)="onCourseSelected($event)"
-	[cardIndex]="i + 1"
-	[class.is-first]="isFirst"
-	[class.is-last]="isLast"
-	[class.is-even]="isEven"
-	[class.is-odd]="isOdd" 
-	/>
--->
+<div class="courses" *ngIf="courses[0] as course">
 
   <course-card
-    *ngFor="let course of courses"
     (courseSelected)="onCourseSelected($event)"
-    [course]="course"
-  >
+    [course]="course">
+
+		  <img #courseImage width="300" alt="Angular Logo" class="course-image"
+    [src]="course.iconUrl" />
+		<h5>Total lesson: 5</h5>
+
+		  <div class="course-description">
+    {{course.longDescription}}
+  </div>
+
+	Edit description <textarea></textarea>
+
   </course-card>
 
-  <!-- new syntax
-	@for( course of courses; track course.id; let index = $index; let count = $count; let first = $first; let last = $last; let even = $even; let odd = $odd;) {
-		
-		<course-card [class.is-first]="first" [class.is-last]="last" [class.is-even]="even" [class.is-odd]="odd" [course]="course" (courseSelected)="onCourseSelected($event)" [index]="index +1"/>
-	}
-
-	@empty {
-		<h1>No elements found</h1>
-	}
--->
-  <!-- <course-card [course]="courses[0]" (courseSelected)="onCourseSelected($event)" #cardRef/>
-
-	<course-card [course]="courses[1]" (courseSelected)="onCourseSelected($event)" />
-
-	<course-card [course]="courses[2]" (courseSelected)="onCourseSelected($event)" /> -->
 </div>

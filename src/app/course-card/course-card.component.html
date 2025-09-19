@@ -20,23 +20,12 @@
 [ngClass]="cardClasses()" [ngStyle]="cardStyles()">
   <div class="course-title">{{course.description}}</div>
 
-	@if(course.iconUrl) {
-  <img #courseImage
-    width="300"
-    alt="Angular Logo"
-    [src]="course.iconUrl"
-  />
-  
-	}@else{
-		<h2>No Image</h2>
-	}
+	<ng-content select=".course-image"></ng-content>
+		<ng-content select=".course-description"></ng-content>
 
 
-  <div class="course-description">
-    {{course.longDescription}}
-  </div>
 
-	old depracated syntax
+	<!-- old depracated syntax -->
 	<ng-container [ngSwitch]="course.category">
 		<div class="course-category">
 			<ng-container *ngSwitchCase="'BEGINNER'">
