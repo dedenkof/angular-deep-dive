@@ -4,7 +4,7 @@
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
   />
 </div>
-
+<button (click)="onCoursesEdited()">Add Courses</button>
 <!-- <div>{{ courses | json }}</div>
 <div class="keyvalue" *ngFor="let pair of course | keyvalue">
   {{ pair.key + " : " + pair.value }}
@@ -23,6 +23,13 @@
 	/>
 -->
 
+  <course-card
+    *ngFor="let course of courses"
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course"
+  >
+  </course-card>
+
   <!-- new syntax
 	@for( course of courses; track course.id; let index = $index; let count = $count; let first = $first; let last = $last; let even = $even; let odd = $odd;) {
 		
@@ -33,11 +40,9 @@
 		<h1>No elements found</h1>
 	}
 -->
-  <course-card [course]="courses[0]" (courseSelected)="onCourseSelected($event)" #cardRef/>
+  <!-- <course-card [course]="courses[0]" (courseSelected)="onCourseSelected($event)" #cardRef/>
 
 	<course-card [course]="courses[1]" (courseSelected)="onCourseSelected($event)" />
 
-	<course-card [course]="courses[2]" (courseSelected)="onCourseSelected($event)" />
-
-
+	<course-card [course]="courses[2]" (courseSelected)="onCourseSelected($event)" /> -->
 </div>

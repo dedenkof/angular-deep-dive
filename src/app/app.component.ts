@@ -1,8 +1,15 @@
-import { Component, ElementRef, ViewChild, ViewChildren } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from "@angular/core";
 import { CourseCardComponent } from "./course-card/course-card.component";
 import { COURSES } from "src/db-data";
 import { Course } from "./model/course";
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
 
 // Просто запустіть цю команду у вашому проекті, і більшість вашого коду буде прозоро перетворено на новий синтаксис.
 // ng g @angular/core:control-flow
@@ -11,38 +18,66 @@ import { CommonModule } from '@angular/common';
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-	imports: [CourseCardComponent, CommonModule],
+  imports: [CourseCardComponent, CommonModule],
 })
+export class AppComponent implements AfterViewInit {
+  courses = COURSES;
 
-export class AppComponent {
+  //@ViewChild(CourseCardComponent) card1: CourseCardComponent;
 
-	courses = COURSES;
+  //@ViewChild("cardRef", { read: ElementRef }) card: CourseCardComponent;
 
-	@ViewChild(CourseCardComponent) card1: CourseCardComponent;
+  // @ViewChild('container') containerDiv: ElementRef;
 
-	@ViewChild('cardRef', {read: ElementRef}) card: CourseCardComponent;
+  //@ViewChild("courseImage") courseImage: ElementRef;
+  
+	@ViewChildren(CourseCardComponent, {read: ElementRef}) cards: QueryList<ElementRef>;
 
-	@ViewChild('container')
-	containerDiv: ElementRef;
-
-	  onCourseSelected(course: Course) {
-    console.log('Card clicked!', this.card);
+  constructor() {
+    //console.log("containerDiv", this.card);
   }
 
+  ngAfterViewInit() {
+
+		// this.cards.changes.subscribe(
+		// 	cards => console.log(cards)
+		// );
+
+		console.log(this.cards);
 
 
-	// startDate = new Date(2025, 9, 5);
+    //console.log("courseImage", this.courseImage);
+    //console.log(this.cards.first);
+  }
 
-	// title = COURSES[0].description;
+  onCourseSelected(course: Course) {
+    //console.log("containerDiv", this.card);
+  }
 
-	// price = 9.996587989;
+	onCoursesEdited() {
+		this.courses.push({
+        id: 1,
+        description: "Angular Core Deep Dive",
+        iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png',
+        longDescription: "A detailed walk-through of the most important part of Angular - the Core and Common modules",
+        category: 'INTERMEDIATE',
+        lessonsCount: 10
+    }
+	)
+	}
 
-	// rate = 0.67;
+  // startDate = new Date(2025, 9, 5);
 
-// course = COURSES[0];
+  // title = COURSES[0].description;
 
-	// tracking loop for function insert into for track instead course.id (not use our example not suit on)
-	// trackCourse(index:number, course:Course) {
-	// 	return course.id;
-	// }
+  // price = 9.996587989;
+
+  // rate = 0.67;
+
+  // course = COURSES[0];
+
+  // tracking loop for function insert into for track instead course.id (not use our example not suit on)
+  // trackCourse(index:number, course:Course) {
+  // 	return course.id;
+  // }
 }
