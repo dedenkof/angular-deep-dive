@@ -16,18 +16,20 @@
 	</ng-template>
 -->
 
-<div class="course-card"
-[ngClass]="cardClasses()" [ngStyle]="cardStyles()">
-  <div class="course-title">{{course.description}}</div>
+<div class="course-card" *ngIf="course" #container>
+  <div class="course-title">
+		{{ cardIndex || '' + ' ' + course.description}}
+	</div>
 
-	<ng-content select=".course-image"></ng-content>
-		<ng-content select=".course-description"></ng-content>
+	<ng-content select="card-img"></ng-content>
+
+	<ng-content select=".course-description"></ng-content>
 
 
 
 	<!-- old depracated syntax -->
-	<ng-container [ngSwitch]="course.category">
-		<div class="course-category">
+
+		<div class="course-category" [ngSwitch]="course.category">
 			<ng-container *ngSwitchCase="'BEGINNER'">
 				<div class="category">BEGINNER</div>
 			</ng-container>
@@ -45,7 +47,7 @@
 			</ng-container>
 			
 	</div>
-</ng-container>
+
 	<!-- <div class="course-category">
 		@switch(course.category) {
 			@case ("BEGINNER") {

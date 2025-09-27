@@ -5,22 +5,25 @@
   />
 </div>
 
-<div class="courses" *ngIf="courses[0] as course">
 
-  <course-card
-    (courseSelected)="onCourseSelected($event)"
-    [course]="course">
+@for (course of courses; track course.id) {
+	<div class="courses">
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
+			<card-img [src]="course.iconUrl"></card-img>
+      <div class="course-description">{{ course.longDescription }}</div>
+    </course-card>
+		</div>
+  }
 
-		  <img #courseImage width="300" alt="Angular Logo" class="course-image"
-    [src]="course.iconUrl" />
-		<h5>Total lesson: 5</h5>
 
-		  <div class="course-description">
-    {{course.longDescription}}
-  </div>
+<!-- <div class="courses" *ngIf="courses[0] as course">
+  <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
+    <course-image [src]="course.iconUrl"></course-image>
 
-	Edit description <textarea></textarea>
+    <div class="course-description">
+      {{ course.longDescription }}
+    </div>
 
+    Edit description <textarea></textarea>
   </course-card>
-
-</div>
+</div> -->

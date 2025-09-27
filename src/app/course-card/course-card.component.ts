@@ -1,43 +1,50 @@
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  ViewChild,
+  AfterViewInit,
+  ContentChild,
+  ElementRef,
+} from "@angular/core";
 import { Course } from "../model/course";
-import { CommonModule } from '@angular/common';
-
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "course-card",
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
-	imports: [CommonModule]
+  imports: [CommonModule],
 })
-export class CourseCardComponent implements OnInit{
+export class CourseCardComponent implements OnInit, AfterViewInit {
+  //	@Input() cardIndex: number;
+  //	@Input({required: true}) index: number;
+  @ContentChild("courseImage") image;
+  //	@ContentChild('container') image;
 
-	constructor (){}
+  @Input() course: Course;
 
-	@Input() course: Course;
+  @Input() cardIndex: number;
 
-//	@Input() cardIndex: number;
+  @Output() courseSelected = new EventEmitter<Course>();
 
-//	@Input({required: true}) index: number;
+  //@ContentChild(CourseImageComponent, { read: ElementRef }) image: ElementRef;
 
+  constructor() {}
 
-	@Output() courseSelected = new EventEmitter<Course>();
+  ngAfterViewInit() {
+    console.log(this.image);
+  }
 
-	onCourseViwed () {	
-		this.courseSelected.emit(this.course);
-	}
+  ngOnInit() {}
 
-	cardClasses() {
-		//return {'beginner': this.course.category == 'BEGINNER'}
-		if(this.course.category == 'BEGINNER') {
-			//return ['beginner'];
-			return 'beginner';
-		}
-	}
+  isImageVisible() {
+    return this.course && this.course.iconUrl;
+  }
 
-	cardStyles() {
-		//return {'background-image': 'url(' + this.course.iconUrl + ')'};
-		return {'border-radius': '32px'};
-	}
-
-	ngOnInit () {}
+  onCourseViwed() {
+    this.courseSelected.emit(this.course);
+  }
 }
