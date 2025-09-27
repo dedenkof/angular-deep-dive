@@ -8,9 +8,13 @@ import {
   AfterViewInit,
   ContentChild,
   ElementRef,
+	ContentChildren,
+	AfterContentInit,
+	QueryList,
 } from "@angular/core";
 import { Course } from "../model/course";
 import { CommonModule } from "@angular/common";
+import { CardImgComponent } from "../card-img/card-img.component";
 
 @Component({
   selector: "course-card",
@@ -18,10 +22,10 @@ import { CommonModule } from "@angular/common";
   styleUrls: ["./course-card.component.css"],
   imports: [CommonModule],
 })
-export class CourseCardComponent implements OnInit, AfterViewInit {
+export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
   //	@Input() cardIndex: number;
   //	@Input({required: true}) index: number;
-  @ContentChild("courseImage") image;
+  //  @ContentChild("courseImage") image;
   //	@ContentChild('container') image;
 
   @Input() course: Course;
@@ -30,13 +34,23 @@ export class CourseCardComponent implements OnInit, AfterViewInit {
 
   @Output() courseSelected = new EventEmitter<Course>();
 
-  //@ContentChild(CourseImageComponent, { read: ElementRef }) image: ElementRef;
+//   @ContentChild(CardImgComponent, { read: ElementRef }) image: ElementRef; // ElementRef {nativeElement: card-img}
+
+	// @ContentChild(CardImgComponent) image: CardImgComponent; // _CardImgComponent {__ngContext__: 2, imageUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png'}
+
+	@ContentChildren(CardImgComponent, {read: ElementRef}) images:QueryList<CardImgComponent>;
+
 
   constructor() {}
 
   ngAfterViewInit() {
-    console.log(this.image);
+    //console.log(this.image);
   }
+
+
+	ngAfterContentInit() {
+			console.log(this.images);
+	}
 
   ngOnInit() {}
 

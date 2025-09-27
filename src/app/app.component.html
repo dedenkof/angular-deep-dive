@@ -6,14 +6,19 @@
 </div>
 
 
-@for (course of courses; track course.id) {
-	<div class="courses">
+<!-- @for (course of courses; track course.id) { -->
+	<div class="courses" *ngIf="courses[0] as course">
     <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
 			<card-img [src]="course.iconUrl"></card-img>
+
+			<card-img [src]="courses[1].iconUrl"></card-img>
+
+			<card-img [src]="courses[2].iconUrl"></card-img>
+
       <div class="course-description">{{ course.longDescription }}</div>
     </course-card>
 		</div>
-  }
+  <!-- } -->
 
 
 <!-- <div class="courses" *ngIf="courses[0] as course">
