@@ -4,22 +4,32 @@
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
   />
 </div>
-
-
+<!-- No image is available yet. -->
 <!-- @for (course of courses; track course.id) { -->
-	<div class="courses" *ngIf="courses[0] as course">
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
-			<card-img [src]="course.iconUrl"></card-img>
+<div class="courses" *ngIf="courses[0] as course">
+  
 
-			<card-img [src]="courses[1].iconUrl"></card-img>
 
-			<card-img [src]="courses[2].iconUrl"></card-img>
+	<!-- <div *ngTemplateOutlet="blankImage; context: {description: course.description}"></div>
 
-      <div class="course-description">{{ course.longDescription }}</div>
-    </course-card>
-		</div>
-  <!-- } -->
+	<div *ngTemplateOutlet="blankImage; context: {description: courses[1].description}"></div>
 
+	<ng-container *ngTemplateOutlet="blankImage; context: {description: courses[2].description}"></ng-container>
+	<hr>
+	<hr> -->
+
+		<ng-template #blankImage let-courseName="description">
+    <p class="warn">{{courseName}}</p>
+    <img src="/assets/empty-image.png" alt="" />
+  </ng-template>
+
+  <course-card (courseSelected)="onCourseSelected($event)" [course]="course" [noImageTpl]="blankImage">
+    <card-img [src]="course.iconUrl"></card-img>
+
+    <div class="course-description">{{ course.longDescription }}</div>
+  </course-card>
+</div>
+<!-- } -->
 
 <!-- <div class="courses" *ngIf="courses[0] as course">
   <course-card (courseSelected)="onCourseSelected($event)" [course]="course">

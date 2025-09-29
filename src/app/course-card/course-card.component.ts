@@ -11,6 +11,7 @@ import {
 	ContentChildren,
 	AfterContentInit,
 	QueryList,
+	TemplateRef,
 } from "@angular/core";
 import { Course } from "../model/course";
 import { CommonModule } from "@angular/common";
@@ -32,6 +33,8 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
 
   @Input() cardIndex: number;
 
+	@Input() noImageTpl: TemplateRef<any>;
+
   @Output() courseSelected = new EventEmitter<Course>();
 
 //   @ContentChild(CardImgComponent, { read: ElementRef }) image: ElementRef; // ElementRef {nativeElement: card-img}
@@ -49,7 +52,9 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
 
 
 	ngAfterContentInit() {
-			console.log(this.images);
+			// console.log(this.images);
+
+			console.log(this.noImageTpl);
 	}
 
   ngOnInit() {}
